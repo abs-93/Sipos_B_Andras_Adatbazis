@@ -1,0 +1,27 @@
+# --- Visual Studio ---
+.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.opendb
+*.db
+*.VC.db
+
+# --- Python ---
+__pycache__/
+*.pyc
+
+# --- C fordítás eredménye ---
+*.exe
+*.o
+*.obj
+
+# --- A programok futás közben létrehozott adatfájljai ---
+*.bin
+*.mdb
+*.mdb.tmp
+*.lock
+talalatok.txt
+bom_teszt.txt
+szamok.txt

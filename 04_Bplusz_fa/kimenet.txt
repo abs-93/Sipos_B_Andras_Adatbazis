@@ -1,0 +1,231 @@
+##################################################
+#  BESZÚRÁSOK (órai kód)                          #
+##################################################
+
+--- [ data.bin FÁJL STRUKTÚRA (11 LAP) ] ---
+  Page 0 [BELSŐ NODE]: Kulcsok=[5] | Gyerek Lapok=[7, 8]
+  Page 1 [LEVÉL NODE] : Rekord ID-k=[1] | Következő levél= -> Page 2
+  Page 2 [LEVÉL NODE] : Rekord ID-k=[2] | Következő levél= -> Page 3
+  Page 3 [LEVÉL NODE] : Rekord ID-k=[3, 4] | Következő levél= -> Page 4
+  Page 4 [LEVÉL NODE] : Rekord ID-k=[5] | Következő levél= -> Page 5
+  Page 5 [LEVÉL NODE] : Rekord ID-k=[6] | Következő levél= -> Page 6
+  Page 6 [LEVÉL NODE] : Rekord ID-k=[7] | Következő levél= -> Page 9
+  Page 7 [BELSŐ NODE]: Kulcsok=[2, 3] | Gyerek Lapok=[1, 2, 3]
+  Page 8 [BELSŐ NODE]: Kulcsok=[6, 7, 8, 9] | Gyerek Lapok=[4, 5, 6, 9, 10]
+  Page 9 [LEVÉL NODE] : Rekord ID-k=[8] | Következő levél= -> Page 10
+  Page 10 [LEVÉL NODE] : Rekord ID-k=[9, 10, 11] | Következő levél= -> NIL
+
+##################################################
+#  1. FELADAT – KERESÉS                           #
+##################################################
+
+[KERESÉS] ID = 7
+  1. lépés: Page 0 [BELSŐ] kulcsok=[5] -> 1. ág -> Page 8
+  2. lépés: Page 8 [BELSŐ] kulcsok=[6, 7, 8, 9] -> 2. ág -> Page 6
+  3. lépés: Page 6 [LEVÉL]  rekordok=[7]
+  >>> TALÁLAT 3 lépésben: ID=7, Név='Hallgato_7_Sopron'
+
+[KERESÉS] ID = 1
+  1. lépés: Page 0 [BELSŐ] kulcsok=[5] -> 0. ág -> Page 7
+  2. lépés: Page 7 [BELSŐ] kulcsok=[2, 3] -> 0. ág -> Page 1
+  3. lépés: Page 1 [LEVÉL]  rekordok=[1]
+  >>> TALÁLAT 3 lépésben: ID=1, Név='Hallgato_1_Miskolc'
+
+[KERESÉS] ID = 11
+  1. lépés: Page 0 [BELSŐ] kulcsok=[5] -> 1. ág -> Page 8
+  2. lépés: Page 8 [BELSŐ] kulcsok=[6, 7, 8, 9] -> 4. ág -> Page 10
+  3. lépés: Page 10 [LEVÉL]  rekordok=[9, 10, 11]
+  >>> TALÁLAT 3 lépésben: ID=11, Név='Hallgato_11_Sopron'
+
+[KERESÉS] ID = 42
+  1. lépés: Page 0 [BELSŐ] kulcsok=[5] -> 1. ág -> Page 8
+  2. lépés: Page 8 [BELSŐ] kulcsok=[6, 7, 8, 9] -> 4. ág -> Page 10
+  3. lépés: Page 10 [LEVÉL]  rekordok=[9, 10, 11]
+  >>> NINCS ilyen rekord (3 lépés)
+
+Bónusz – tartományi keresés (BETWEEN 4 AND 9) a levéllánc segítségével:
+    (4, 'Hallgato_6_Budapest')
+    (5, 'Hallgato_5_Szeged')
+    (6, 'Hallgato_4_Pecs')
+    (7, 'Hallgato_7_Sopron')
+    (8, 'Hallgato_8_Pecs')
+    (9, 'Hallgato_9_Szeged')
+   (8 lap beolvasása: lefelé a fában, majd végig a levélláncon)
+
+##################################################
+#  2. FELADAT – TÖRLÉS                            #
+##################################################
+
+==================================================
+
+[TÖRLÉS] ID = 4: törölve
+   - rekord eltávolítva a Page 3 levélből
+
+--- [ data.bin FÁJL STRUKTÚRA (11 LAP) ] ---
+  Page 0 [BELSŐ NODE]: Kulcsok=[5] | Gyerek Lapok=[7, 8]
+  Page 1 [LEVÉL NODE] : Rekord ID-k=[1] | Következő levél= -> Page 2
+  Page 2 [LEVÉL NODE] : Rekord ID-k=[2] | Következő levél= -> Page 3
+  Page 3 [LEVÉL NODE] : Rekord ID-k=[3] | Következő levél= -> Page 4
+  Page 4 [LEVÉL NODE] : Rekord ID-k=[5] | Következő levél= -> Page 5
+  Page 5 [LEVÉL NODE] : Rekord ID-k=[6] | Következő levél= -> Page 6
+  Page 6 [LEVÉL NODE] : Rekord ID-k=[7] | Következő levél= -> Page 9
+  Page 7 [BELSŐ NODE]: Kulcsok=[2, 3] | Gyerek Lapok=[1, 2, 3]
+  Page 8 [BELSŐ NODE]: Kulcsok=[6, 7, 8, 9] | Gyerek Lapok=[4, 5, 6, 9, 10]
+  Page 9 [LEVÉL NODE] : Rekord ID-k=[8] | Következő levél= -> Page 10
+  Page 10 [LEVÉL NODE] : Rekord ID-k=[9, 10, 11] | Következő levél= -> NIL
+
+==================================================
+
+[TÖRLÉS] ID = 5: törölve
+   - rekord eltávolítva a Page 4 levélből
+   - összevonás: Page 5 -> Page 4, Page 5 felszabadítva
+
+--- [ data.bin FÁJL STRUKTÚRA (11 LAP) ] ---
+  Page 0 [BELSŐ NODE]: Kulcsok=[5] | Gyerek Lapok=[7, 8]
+  Page 1 [LEVÉL NODE] : Rekord ID-k=[1] | Következő levél= -> Page 2
+  Page 2 [LEVÉL NODE] : Rekord ID-k=[2] | Következő levél= -> Page 3
+  Page 3 [LEVÉL NODE] : Rekord ID-k=[3] | Következő levél= -> Page 4
+  Page 4 [LEVÉL NODE] : Rekord ID-k=[6] | Következő levél= -> Page 6
+  Page 5 [SZABAD LAP] (újrahasznosítható)
+  Page 6 [LEVÉL NODE] : Rekord ID-k=[7] | Következő levél= -> Page 9
+  Page 7 [BELSŐ NODE]: Kulcsok=[2, 3] | Gyerek Lapok=[1, 2, 3]
+  Page 8 [BELSŐ NODE]: Kulcsok=[7, 8, 9] | Gyerek Lapok=[4, 6, 9, 10]
+  Page 9 [LEVÉL NODE] : Rekord ID-k=[8] | Következő levél= -> Page 10
+  Page 10 [LEVÉL NODE] : Rekord ID-k=[9, 10, 11] | Következő levél= -> NIL
+
+==================================================
+
+[TÖRLÉS] ID = 42: NINCS ilyen rekord
+
+--- [ data.bin FÁJL STRUKTÚRA (11 LAP) ] ---
+  Page 0 [BELSŐ NODE]: Kulcsok=[5] | Gyerek Lapok=[7, 8]
+  Page 1 [LEVÉL NODE] : Rekord ID-k=[1] | Következő levél= -> Page 2
+  Page 2 [LEVÉL NODE] : Rekord ID-k=[2] | Következő levél= -> Page 3
+  Page 3 [LEVÉL NODE] : Rekord ID-k=[3] | Következő levél= -> Page 4
+  Page 4 [LEVÉL NODE] : Rekord ID-k=[6] | Következő levél= -> Page 6
+  Page 5 [SZABAD LAP] (újrahasznosítható)
+  Page 6 [LEVÉL NODE] : Rekord ID-k=[7] | Következő levél= -> Page 9
+  Page 7 [BELSŐ NODE]: Kulcsok=[2, 3] | Gyerek Lapok=[1, 2, 3]
+  Page 8 [BELSŐ NODE]: Kulcsok=[7, 8, 9] | Gyerek Lapok=[4, 6, 9, 10]
+  Page 9 [LEVÉL NODE] : Rekord ID-k=[8] | Következő levél= -> Page 10
+  Page 10 [LEVÉL NODE] : Rekord ID-k=[9, 10, 11] | Következő levél= -> NIL
+
+==================================================
+
+[TÖRLÉS] ID = 1: törölve
+   - rekord eltávolítva a Page 1 levélből
+   - összevonás: Page 2 -> Page 1, Page 2 felszabadítva
+   - kölcsönzés (belső): kulcsforgatás a jobb testvéren át (Page 8 -> Page 7)
+
+--- [ data.bin FÁJL STRUKTÚRA (11 LAP) ] ---
+  Page 0 [BELSŐ NODE]: Kulcsok=[7] | Gyerek Lapok=[7, 8]
+  Page 1 [LEVÉL NODE] : Rekord ID-k=[2] | Következő levél= -> Page 3
+  Page 2 [SZABAD LAP] (újrahasznosítható)
+  Page 3 [LEVÉL NODE] : Rekord ID-k=[3] | Következő levél= -> Page 4
+  Page 4 [LEVÉL NODE] : Rekord ID-k=[6] | Következő levél= -> Page 6
+  Page 5 [SZABAD LAP] (újrahasznosítható)
+  Page 6 [LEVÉL NODE] : Rekord ID-k=[7] | Következő levél= -> Page 9
+  Page 7 [BELSŐ NODE]: Kulcsok=[3, 5] | Gyerek Lapok=[1, 3, 4]
+  Page 8 [BELSŐ NODE]: Kulcsok=[8, 9] | Gyerek Lapok=[6, 9, 10]
+  Page 9 [LEVÉL NODE] : Rekord ID-k=[8] | Következő levél= -> Page 10
+  Page 10 [LEVÉL NODE] : Rekord ID-k=[9, 10, 11] | Következő levél= -> NIL
+
+==================================================
+
+[TÖRLÉS] ID = 2: törölve
+   - rekord eltávolítva a Page 1 levélből
+   - összevonás: Page 3 -> Page 1, Page 3 felszabadítva
+   - összevonás: Page 8 -> Page 7, Page 8 felszabadítva
+   - a gyökér kiürült: Page 7 tartalma lett az új gyökér (Page 0), a fa magassága eggyel csökkent
+
+--- [ data.bin FÁJL STRUKTÚRA (11 LAP) ] ---
+  Page 0 [BELSŐ NODE]: Kulcsok=[5, 7, 8, 9] | Gyerek Lapok=[1, 4, 6, 9, 10]
+  Page 1 [LEVÉL NODE] : Rekord ID-k=[3] | Következő levél= -> Page 4
+  Page 2 [SZABAD LAP] (újrahasznosítható)
+  Page 3 [SZABAD LAP] (újrahasznosítható)
+  Page 4 [LEVÉL NODE] : Rekord ID-k=[6] | Következő levél= -> Page 6
+  Page 5 [SZABAD LAP] (újrahasznosítható)
+  Page 6 [LEVÉL NODE] : Rekord ID-k=[7] | Következő levél= -> Page 9
+  Page 7 [SZABAD LAP] (újrahasznosítható)
+  Page 8 [SZABAD LAP] (újrahasznosítható)
+  Page 9 [LEVÉL NODE] : Rekord ID-k=[8] | Következő levél= -> Page 10
+  Page 10 [LEVÉL NODE] : Rekord ID-k=[9, 10, 11] | Következő levél= -> NIL
+
+==================================================
+
+[TÖRLÉS] ID = 3: törölve
+   - rekord eltávolítva a Page 1 levélből
+   - összevonás: Page 4 -> Page 1, Page 4 felszabadítva
+
+--- [ data.bin FÁJL STRUKTÚRA (11 LAP) ] ---
+  Page 0 [BELSŐ NODE]: Kulcsok=[7, 8, 9] | Gyerek Lapok=[1, 6, 9, 10]
+  Page 1 [LEVÉL NODE] : Rekord ID-k=[6] | Következő levél= -> Page 6
+  Page 2 [SZABAD LAP] (újrahasznosítható)
+  Page 3 [SZABAD LAP] (újrahasznosítható)
+  Page 4 [SZABAD LAP] (újrahasznosítható)
+  Page 5 [SZABAD LAP] (újrahasznosítható)
+  Page 6 [LEVÉL NODE] : Rekord ID-k=[7] | Következő levél= -> Page 9
+  Page 7 [SZABAD LAP] (újrahasznosítható)
+  Page 8 [SZABAD LAP] (újrahasznosítható)
+  Page 9 [LEVÉL NODE] : Rekord ID-k=[8] | Következő levél= -> Page 10
+  Page 10 [LEVÉL NODE] : Rekord ID-k=[9, 10, 11] | Következő levél= -> NIL
+
+==================================================
+
+[TÖRLÉS] ID = 6: törölve
+   - rekord eltávolítva a Page 1 levélből
+   - összevonás: Page 6 -> Page 1, Page 6 felszabadítva
+
+--- [ data.bin FÁJL STRUKTÚRA (11 LAP) ] ---
+  Page 0 [BELSŐ NODE]: Kulcsok=[8, 9] | Gyerek Lapok=[1, 9, 10]
+  Page 1 [LEVÉL NODE] : Rekord ID-k=[7] | Következő levél= -> Page 9
+  Page 2 [SZABAD LAP] (újrahasznosítható)
+  Page 3 [SZABAD LAP] (újrahasznosítható)
+  Page 4 [SZABAD LAP] (újrahasznosítható)
+  Page 5 [SZABAD LAP] (újrahasznosítható)
+  Page 6 [SZABAD LAP] (újrahasznosítható)
+  Page 7 [SZABAD LAP] (újrahasznosítható)
+  Page 8 [SZABAD LAP] (újrahasznosítható)
+  Page 9 [LEVÉL NODE] : Rekord ID-k=[8] | Következő levél= -> Page 10
+  Page 10 [LEVÉL NODE] : Rekord ID-k=[9, 10, 11] | Következő levél= -> NIL
+
+==================================================
+
+[TÖRLÉS] ID = 7: törölve
+   - rekord eltávolítva a Page 1 levélből
+   - összevonás: Page 9 -> Page 1, Page 9 felszabadítva
+
+--- [ data.bin FÁJL STRUKTÚRA (11 LAP) ] ---
+  Page 0 [BELSŐ NODE]: Kulcsok=[9] | Gyerek Lapok=[1, 10]
+  Page 1 [LEVÉL NODE] : Rekord ID-k=[8] | Következő levél= -> Page 10
+  Page 2 [SZABAD LAP] (újrahasznosítható)
+  Page 3 [SZABAD LAP] (újrahasznosítható)
+  Page 4 [SZABAD LAP] (újrahasznosítható)
+  Page 5 [SZABAD LAP] (újrahasznosítható)
+  Page 6 [SZABAD LAP] (újrahasznosítható)
+  Page 7 [SZABAD LAP] (újrahasznosítható)
+  Page 8 [SZABAD LAP] (újrahasznosítható)
+  Page 9 [SZABAD LAP] (újrahasznosítható)
+  Page 10 [LEVÉL NODE] : Rekord ID-k=[9, 10, 11] | Következő levél= -> NIL
+
+Újrabeszúrás – a felszabadult lapokat újrahasznosítja:
+
+--- [ data.bin FÁJL STRUKTÚRA (11 LAP) ] ---
+  Page 0 [BELSŐ NODE]: Kulcsok=[2, 3, 9] | Gyerek Lapok=[1, 2, 3, 10]
+  Page 1 [LEVÉL NODE] : Rekord ID-k=[1] | Következő levél= -> Page 2
+  Page 2 [LEVÉL NODE] : Rekord ID-k=[2] | Következő levél= -> Page 3
+  Page 3 [LEVÉL NODE] : Rekord ID-k=[3, 4, 8] | Következő levél= -> Page 10
+  Page 4 [SZABAD LAP] (újrahasznosítható)
+  Page 5 [SZABAD LAP] (újrahasznosítható)
+  Page 6 [SZABAD LAP] (újrahasznosítható)
+  Page 7 [SZABAD LAP] (újrahasznosítható)
+  Page 8 [SZABAD LAP] (újrahasznosítható)
+  Page 9 [SZABAD LAP] (újrahasznosítható)
+  Page 10 [LEVÉL NODE] : Rekord ID-k=[9, 10, 11] | Következő levél= -> NIL
+
+[KERESÉS] ID = 3
+  1. lépés: Page 0 [BELSŐ] kulcsok=[2, 3, 9] -> 2. ág -> Page 3
+  2. lépés: Page 3 [LEVÉL]  rekordok=[3, 4, 8]
+  >>> TALÁLAT 2 lépésben: ID=3, Név='Uj_3'
+
+Összes rekord a levélláncon: [(1, 'Uj_1'), (2, 'Uj_2'), (3, 'Uj_3'), (4, 'Uj_4'), (8, 'Hallgato_8_Pecs'), (9, 'Hallgato_9_Szeged'), (10, 'Hallgato_10_Budapest'), (11, 'Hallgato_11_Sopron')]

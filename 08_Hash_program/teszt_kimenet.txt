@@ -1,0 +1,8 @@
+[OK] szöveg hash – 4 algoritmus a szabványos 'abc' tesztvektorral
+[OK] fájl hash (3 MB véletlen adat) = hashlib referencia, darabolt olvasással is
+[OK] folyamatjelző: 4 lépés, utolsó = 100%
+[OK] ellenőrzés: egyezés felismerése; 1 bit módosítás után NEM EGYEZIK
+[OK] algoritmus felismerése a hash hosszából (32/40/64/128 hexa karakter)
+[OK] üres fájl SHA-256 = e3b0c442...b855 (a jegyzetben is ez a példa-hash!)
+
+Minden teszt sikeres.

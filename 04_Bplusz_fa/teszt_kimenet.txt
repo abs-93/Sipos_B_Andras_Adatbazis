@@ -1,0 +1,12 @@
+seed= 1: OK  (600 művelet, max. keresési lépésszám: 4, fájl: 80 lap)
+seed= 2: OK  (600 művelet, max. keresési lépésszám: 4, fájl: 83 lap)
+seed= 3: OK  (600 művelet, max. keresési lépésszám: 4, fájl: 96 lap)
+seed= 4: OK  (600 művelet, max. keresési lépésszám: 4, fájl: 93 lap)
+seed= 5: OK  (600 művelet, max. keresési lépésszám: 4, fájl: 83 lap)
+seed= 6: OK  (600 művelet, max. keresési lépésszám: 4, fájl: 86 lap)
+seed= 7: OK  (600 művelet, max. keresési lépésszám: 4, fájl: 88 lap)
+seed= 8: OK  (600 művelet, max. keresési lépésszám: 4, fájl: 86 lap)
+seed= 9: OK  (600 művelet, max. keresési lépésszám: 4, fájl: 96 lap)
+seed=10: OK  (600 művelet, max. keresési lépésszám: 4, fájl: 86 lap)
+
+Minden teszt sikeres: a keresés és a törlés helyes, a B+fa szabályai mindig teljesülnek.

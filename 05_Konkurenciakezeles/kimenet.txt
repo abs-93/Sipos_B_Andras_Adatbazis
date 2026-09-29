@@ -1,0 +1,40 @@
+
+========================================================================
+ 1) 6 író + 6 olvasó szál egyszerre – sérül-e rekord?
+========================================================================
+Kiírt rekordok: 240 (elvárt: 240)
+Párhuzamos sikeres olvasások: 136, sérült rekord: 0
+EREDMÉNY: OK
+
+========================================================================
+ 2) LOST UPDATE: 8 szál × 50 növelés ugyanazon a számlálón
+========================================================================
+a) Naiv olvas + ír:         végérték =   54  (elvárt: 400)  <- módosítások elvesztek!
+b) Atomi update_record():   végérték =  400  (elvárt: 400)  -> OK
+
+========================================================================
+ 3) Párhuzamos olvasás: RLock (órai kód) vs. RWLock (javított)
+========================================================================
+   RLock  (egyszerre 1 olvasó): 8 olvasás ideje =    405 ms
+   RWLock (sok olvasó egyszerre): 8 olvasás ideje =     53 ms
+   -> az RWLock-kal az olvasások átfedik egymást, ~8× gyorsabb.
+
+========================================================================
+ 4) Több FOLYAMAT (külön programpéldány) – OS szintű fájlzár
+========================================================================
+4 folyamat × 100 atomi növelés: végérték = 400 (elvárt: 400) -> OK  [0.18 s]
+
+========================================================================
+ 5) Az órai forgatókönyv determinisztikusan (2 író, 3 olvasó)
+========================================================================
+[SZÁL - Iro-1] ÍRÁS: ID=0
+[SZÁL - Iro-2] ÍRÁS: ID=10
+[SZÁL - Iro-1] ÍRÁS: ID=1
+[SZÁL - Iro-1] ÍRÁS: ID=2
+[SZÁL - Iro-2] ÍRÁS: ID=11
+[SZÁL - Iro-2] ÍRÁS: ID=12
+  --> [SZÁL - Olvaso-1] OLVASÁS: {'id': 1, 'name': 'Adat_1_thread_Iro-1'}
+  --> [SZÁL - Olvaso-2] OLVASÁS: {'id': 11, 'name': 'Adat_11_thread_Iro-2'}
+  --> [SZÁL - Olvaso-3] OLVASÁS: None
+Az ID=5 egy 'lyuk' a fájlban -> javítva None-t ad (az órai kód {'id': 0, 'name': ''}-t).
+Fájlméret: 832 bájt = 13 rekordhely

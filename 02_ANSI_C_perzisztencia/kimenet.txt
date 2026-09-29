@@ -1,0 +1,46 @@
+=== 1) Szöveges fájl olvasása, fájlmutató léptetése ===
+(Az első két sort átléptük, a fájlmutató most a 54. bájton áll.)
+1 1 okolvivas legsuly
+1 1 vivas kard egyeni
+1 1 uszas 400 m gyorsuszas
+1 1 torna felemas korlat
+1 1 vizilabda
+2 1 uszas 200 m melluszas
+2 1 vivas kard egyeni
+3 1 atletika kalapacsvetes
+3 1 uszas 4x100 m gyorsvalto
+4 1 kajak-kenu K-1 1000 m
+5 1 uszas 100 m hatuszas
+
+=== 2) Lineáris keresés: "uszas" ===
+1 1 uszas 100 m gyorsuszas
+1 1 uszas 400 m gyorsuszas
+2 1 uszas 200 m melluszas
+3 1 uszas 4x100 m gyorsvalto
+5 1 uszas 100 m hatuszas
+Találatok száma: 5
+
+=== 3) Perzisztencia és pufferelés ===
+A találatokat kiírtuk, de NEM zártuk le a fájlt (nincs fclose/fflush).
+A talalatok.txt mérete a lemezen most: 0 bájt
+Várakozás 5 mp... (közben nyisd meg a talalatok.txt-t egy szerkesztőben: üres!)
+Egy második olvasó ezt látja: "ÜRES"
+fflush() után a fájl mérete: 134 bájt
+A lemezen tárolt találatok:
+  1 1 uszas 100 m gyorsuszas
+  1 1 uszas 400 m gyorsuszas
+  2 1 uszas 200 m melluszas
+  3 1 uszas 4x100 m gyorsvalto
+  5 1 uszas 100 m hatuszas
+
+=== 4) Bináris rekordok – fwrite / fseek / fread ===
+Rekordméret: 64 bájt, fájlméret: 384 bájt
+  [0] id=0 nev=Miskolci Egyetem
+  [1] id=1 nev=Adatbaziskezeles
+  [2] id=2 nev=Oracle APEX
+  [3] (üres hely)
+  [4] (üres hely)
+  [5] id=5 nev=Otodik hely
+Direkt elérés: 2. rekord -> Oracle APEX
+
+Ez a program 1. futása (futasok.bin – újraindításkor nő).

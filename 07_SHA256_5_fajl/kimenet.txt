@@ -1,0 +1,19 @@
+Fájl                             Méret  SHA-256
+----------------------------------------------------------------------------------------------------------
+helsinki.txt                     319 B  32c845587eedd05b8ab482fb48cfb0e899078dc35ebc7b2317232e481a5d1f58
+perzisztencia.c                 7123 B  1bb8b117cd337f7b95553e4aff77dfb1bb5b92832c537789aa32e0744c296c37
+demo.sql                        1646 B  bd2f52f3f7f135a7ae7892095d1e5d684695ba4387bbdbb6e39cc7e8a9f42622
+gui_egyezik.png                46005 B  a1aa395c03460154e5767460a9c80c28ef9317a22dec121115094f42b4742eb4
+BOM_es_Endianness.md            4479 B  30e84a83dd98f07e1a919157209784cacd4ca7da209e83c8cfdc393de62bdbf9
+
+Lavina-effektus:
+  'Adatbázis-kezelés'    -> 97d07cb115cec539390badcfe476c206d4922f07bb14ae438e0ca86c8b367dfd
+  'Adatbázis-kezelés!'   -> 896160c29d3832a9d658f09dafb450228dad9546a10409d8711eaddb50c1a90e
+  'adatbázis-kezelés'    -> 41d44797029018da5da707fde26a593a1ab990fae9dd4b08b8b0a3ccabd3932f
+
+Ellenőrzés a Linux sha256sum paranccsal:
+32c845587eedd05b8ab482fb48cfb0e899078dc35ebc7b2317232e481a5d1f58  helsinki.txt
+1bb8b117cd337f7b95553e4aff77dfb1bb5b92832c537789aa32e0744c296c37  perzisztencia.c
+bd2f52f3f7f135a7ae7892095d1e5d684695ba4387bbdbb6e39cc7e8a9f42622  demo.sql
+a1aa395c03460154e5767460a9c80c28ef9317a22dec121115094f42b4742eb4  gui_egyezik.png
+30e84a83dd98f07e1a919157209784cacd4ca7da209e83c8cfdc393de62bdbf9  BOM_es_Endianness.md

@@ -1,0 +1,13 @@
+1 1 atletika 4x100 m valto
+1 1 uszas 100 m gyorsuszas
+1 1 okolvivas legsuly
+1 1 vivas kard egyeni
+1 1 uszas 400 m gyorsuszas
+1 1 torna felemas korlat
+1 1 vizilabda
+2 1 uszas 200 m melluszas
+2 1 vivas kard egyeni
+3 1 atletika kalapacsvetes
+3 1 uszas 4x100 m gyorsvalto
+4 1 kajak-kenu K-1 1000 m
+5 1 uszas 100 m hatuszas

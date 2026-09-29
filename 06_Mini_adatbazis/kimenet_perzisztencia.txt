@@ -1,0 +1,35 @@
+=== Új programindítás: az adatok a bináris fájlból töltődnek vissza ===
+Egyszerű SQL adatbázis – több tábla, bináris mentés (adatbazis.mdb)
+Írd be: HELP a parancsokhoz, EXIT a kilépéshez.
+
+SQL> +--------+----------+-------+
+| tábla  | oszlopok | sorok |
++--------+----------+-------+
+| users  | 4        | 4     |
+| jegyek | 4        | 4     |
++--------+----------+-------+
+(2 sor)
+SQL> +----+-----------------------+----------+-----+
+| id | nev                   | varos    | kor |
++----+-----------------------+----------+-----+
+| 2  | Kovács Béla           | Debrecen | 23  |
+| 4  | O'Brien, Kate; vendég | Budapest | 25  |
+| 5  | Tóth Éva              | Eger     | 30  |
++----+-----------------------+----------+-----+
+(3 sor)
+SQL> 1 sor beszúrva a 'users' táblába.
+SQL> 
+=== Az adatbazis.mdb első 128 bájtja (hexa) ===
+00000000  4D 49 4E 49 44 42 30 31 00 02 00 00 00 05 75 73  |MINIDB01......us|
+00000010  65 72 73 00 04 00 00 00 02 69 64 01 01 00 00 00  |ers......id.....|
+00000020  03 6E 65 76 03 00 00 00 00 05 76 61 72 6F 73 03  |.nev......varos.|
+00000030  00 00 00 00 03 6B 6F 72 01 00 00 00 00 05 01 00  |.....kor........|
+00000040  00 00 00 00 00 00 01 01 00 00 00 09 4E 61 67 79  |............Nagy|
+00000050  20 41 6E 6E 61 01 00 00 00 07 4D 69 73 6B 6F 6C  | Anna.....Miskol|
+00000060  63 01 00 00 00 00 00 00 00 15 01 00 00 00 00 00  |c...............|
+00000070  00 00 02 01 00 00 00 0D 4B 6F 76 C3 A1 63 73 20  |........Kov..cs |
+(MINIDB01 = fájlazonosító, 00 02 = 2 tábla, 00 00 00 05 'users' = név hossz + név, ...)
+Fájlméret: 515 bájt
+
+=== Sérült fájl felismerése: 1 bájt átírása a fájl közepén ===
+Betöltés -> Hiba: A fájl sérült (CRC32 eltérés)!
