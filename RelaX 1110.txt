@@ -1,0 +1,32 @@
+1.
+π cim, ar(σ mufaj='Horror'(konyv))
+
+2.
+π cim, nev(konyv ⨝ szerzo=szkod szerzo)
+
+3.
+π cim(σ nemzetiseg='brit'(konyv ⨝ szerzo=szkod szerzo))
+
+4.
+γ;COUNT(kkod)->darab(σ mufaj='Fantasy'(konyv))
+
+5.
+π cim, ar(konyv ⨝ ar=minar(γ; MIN(ar)->minar(konyv)))
+
+6.
+π kkod, cim, ar, mufaj, szerzo (konyv ⨝ ar=maxar (γ; MAX(ar)->maxar(konyv)))
+
+7.
+π cim, nev (σ ar>2000(konyv ⨝ szerzo=szkod szerzo))
+
+8.
+γ mufaj;AVG(ar)->atlagar(konyv)
+
+9.
+γ nev;SUM(ar)->osszertek(konyv ⨝ szerzo=szkod szerzo)
+
+10.
+π cim (σ ar > atlag (konyv ⨯ γ ; AVG(ar) -> atlag (konyv)))
+
+11.
+γ nev ; COUNT(kkod) -> darab (konyv ⨝ szerzo=szkod szerzo)
