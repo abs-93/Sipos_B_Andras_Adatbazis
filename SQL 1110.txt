@@ -1,0 +1,15 @@
+[5.]
+
+1.
+INSERT INTO resztvevo (tajszam, nev, lakcim) VALUES ('123456789', 'Nagy Péter', 'Miskolc, Fő utca 1.');
+
+2.
+DELETE FROM tanfolyam WHERE ar < 10000;
+
+3.
+UPDATE tanfolyam SET ar = ar * 1.2 WHERE tipus = 'Nyelv'
+
+
+[6.]
+
+DELETE FROM termekek WHERE kategoria IS NULL
