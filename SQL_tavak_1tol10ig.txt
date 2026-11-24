@@ -1,0 +1,10 @@
+SELECT nev, tipus FROM alloviz WHERE tipus = 'morotvató'
+SELECT nev FROM alloviz WHERE vizgyujto > 100;
+SELECT AVG(terulet) AS atlagos_terulet FROM alloviz WHERE tipus = 'bányató';
+SELECT nev FROM TELEPULES_JO WHERE id = 382;
+SELECT nev FROM TELEPULES_JO WHERE nev LIKE 'S%';
+SELECT DISTINCT tipus FROM alloviz;
+SELECT t.nev FROM TELEPULES_JO t JOIN HELYKAPCS_JO h ON h.gpsid = t.id JOIN alloviz a ON a.id = h.allovizid WHERE a.nev = 'Balaton';
+SELECT a.nev AS allovizneve, COUNT(h.gpsid) AS db FROM ALLOVIZ a JOIN HELYKAPCS_JO h ON h.allovizid = a.id GROUP BY a.nev;
+SELECT a.nev, COUNT(h.gpsid) AS db FROM ALLOVIZ a JOIN HELYKAPCS_JO h ON h.allovizid = a.id GROUP BY a.nev ORDER BY db DESC FETCH FIRST 1 ROWS ONLY;
+SELECT nev, tipus, terulet FROM ALLOVIZ WHERE terulet BETWEEN 3 AND 10 AND vizgyujto >= 10*terulet;
